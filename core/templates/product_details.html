@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+
+{% endblock title %}
+
+{%block content %}
+
+
+<hr/>
+<center>
+<div class="card col-sm-12 style="z-index:3;"" >
+<div class="card-body">
+<form action="{% url 'trans' %}" method="post">
+<div class="card-header">TRANSFER {{ product.name }}</div>
+{% csrf_token %}
+<input type="hidden" name="product" value="{{ product.name}}">
+<div class="form-group">
+<label for="variant">Colors</label>
+<select name="variant" class="form-control" id="variant">
+{% for variant in variants %}
+<option value="{{  variant.id }}">{{  variant.color }}</option>
+{% endfor %}
+</select>
+<label for="to_user">Give product to</label>
+<select name="to_user" class="form-control" id="to_user">
+{% for user in users %}
+<option value="{{  user.id }}">{{  user.username }}</option>
+{% endfor %}
+</select>
+<label for="quantity">Quantity</label>
+<input type="number" class="form-control" value="1" id="quantity" name="quantity" min="1" max="{{ product.quantity }}"/> 
+</div>
+
+<input type="submit" class="btn btn-primary" value="TRANSFER">
+</form>
+</div>
+</div>
+</center>
+
+{% endblock content %}

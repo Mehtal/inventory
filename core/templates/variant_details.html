@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+
+{% endblock title %}
+
+{%block content %}
+<center >
+<div class="card col-md-3" style="z-index:3;">
+<div class="card-body">
+<form action="{% url 'addorder' %}" method="post">
+<div class="card-header"> {{ variant.product.name }}<strong class="ml-2">{{ variant.color}}</strong>  </div>
+{% csrf_token %}
+<!-- <label for="variant">Colors</label> -->
+<input type="hidden" name="variant" value="{{ variant.id}}">
+<div class="form-group">
+
+<!-- <label for="user">Vendeur</label> -->
+<input type="hidden" class="form-control" value='{{request.user}}' id="user" name="user"/> 
+<label for="quantity">Acheteur</label>
+<input type="text" class="form-control" id="buyer_name" name="buyer_name"/> 
+<label for="quantity">telephone</label>
+<input type="text" class="form-control" id="phone" name="phone"/> 
+<label for="quantity">place</label>
+<input type="text" class="form-control" id="location" name="location"/> 
+<label for="quantity">Quantity</label>
+<input type="number" class="form-control" value="1" id="quantity" name="quantity" min="1" max="{{ variant.quantity }}"/> 
+<label for="quantity">note</label>
+<input type="text" class="form-control" id="observation" name="observation"/> 
+</div>
+
+<input type="submit" class="btn btn-primary" value="submit">
+</form>
+</div>
+</div>
+</center>
+<hr/>
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<center >
+<div class="p-3 mt-0 text-primary" style="background:rgba(0, 0, 0, 0.8)"><strong>bonjour {{ request.user  }}</strong></div>
+
+{% for v in variants%}
+<div class="col-md-3 card my-3 mx-0" style="z-index:3;">
+<h6 class="bg-default p-3 mb-0"> <a href="{% url 'variant-detail' v.id %}">{{ v.product.name}} <strong class="ml-2">{{ v.color}} </strong> </a>  <a data-toggle="collapse" href="#AboutUser" aria-expanded="true" aria-controls="AboutUser" class="align-text-top text-white pull-right"><small>Hide</small></a></h6>
+<div class="card-block p-3 collapse show" id="AboutUser">
+  <ul class="cl list-group">
+    <li class=" mb-2 list-group-item"><span class="mr-1 mb-5">Quantity :</span><strong class="ml-2" >{{ v.quantity}}</strong></li>
+    <li class=" mb-2 list-group-item"><span class="mr-1">Taille :</span>{% for s in v.size.all %}<strong class="mx-1">[{{s.name}}],</strong>{% endfor %}</li>
+  </ul>
+  <img class="ccard-img-bottom" src="{{v.product.image.url}}" alt="">
+</div>
+
+</div>
+{% endfor %}
+</center>
+{% endblock %}
+
